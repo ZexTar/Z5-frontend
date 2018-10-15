@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 class Leaderboard extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			leaders: [],
 			scores: [],
@@ -14,20 +14,23 @@ class Leaderboard extends Component {
 		fetch('http://localhost:3000/leaderboard')
 			.then(res => res.json())
 			.then((data) => {
-				const leaders = [];
-				const scores = [];
-				for (let i = 0; i < 3; i += 1) {
-					leaders.push(data[i].name);
-					scores.push(data[i].clicks);
+				if (data.length > 2) {
+					const leaders = [];
+					const scores = [];
+					for (let i = 0; i < 3; i += 1) {
+						leaders.push(data[i].name);
+						scores.push(data[i].clicks);
+					}
+					this.setState({
+						leaders,
+						scores,
+					});
 				}
-				this.setState({
-					leaders,
-					scores,
-				});
 			});
 	}
 
 	render() {
+		const { routeChange, restart, resetClicks } = this.props;
 		if (this.state.leaders.length < 3) {
 			return (
 				<div className="f3 tc">
@@ -51,9 +54,18 @@ class Leaderboard extends Component {
 						{`3. ${this.state.leaders[2]} with ${this.state.scores[2]} clicks`}
 					</div>
 				</div>
+				<div className="tc">
+					<button onClick={() => { restart(); routeChange('memorygame'); resetClicks(); }} className="button" type="button">PLAY AGAIN</button>
+				</div>
 			</div>
 		);
 	}
 }
+
+Leaderboard.propTypes = {
+	restart: PropTypes.func.isRequired,
+	routeChange: PropTypes.func.isRequired,
+	resetClicks: PropTypes.func.isRequired,
+};
 
 export default Leaderboard;

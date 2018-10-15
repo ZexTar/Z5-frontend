@@ -106,7 +106,11 @@ class App extends Component {
 							)
 							: (route === 'leaderboard')
 								? (
-									<Leaderboard />
+									<Leaderboard
+										routeChange={actions.routeChange}
+										restart={actions.restart}
+										resetClicks={this.resetClicks}
+									/>
 								)
 								: (
 									<div>
