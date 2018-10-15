@@ -16,7 +16,7 @@ const CardList = (props) => {
 				solvedNum += 1;
 			}
 		});
-		if (solvedNum > 1) {
+		if (solvedNum > 14) {
 			routeChange('updatescore');
 		}
 	};

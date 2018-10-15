@@ -63,7 +63,6 @@ class App extends Component {
 
 	render() {
 		const { cards, route, actions } = this.props;
-		console.log(this.state);
 		let isSignedIn = false;
 		if (route === 'memorygame' || route === 'updatescore' || route === 'leaderboard') {
 			isSignedIn = true;
@@ -101,6 +100,7 @@ class App extends Component {
 										clicks={clicks}
 										restart={actions.restart}
 										routeChange={actions.routeChange}
+										resetClicks={this.resetClicks}
 									/>
 								</div>
 							)

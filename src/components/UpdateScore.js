@@ -8,6 +8,7 @@ const UpdateScore = (props) => {
 		clicks,
 		restart,
 		routeChange,
+		resetClicks,
 	} = props;
 
 	fetch('http://localhost:3000/updatescore', {
@@ -29,7 +30,7 @@ const UpdateScore = (props) => {
 				{`${clicks} clicks`}
 			</div>
 			<div className="centerbutton">
-				<button onClick={() => { restart(); routeChange('memorygame'); }} className="button" type="button">PLAY AGAIN</button>
+				<button onClick={() => { restart(); routeChange('memorygame'); resetClicks(); }} className="button" type="button">PLAY AGAIN</button>
 				<button onClick={() => routeChange('leaderboard')} className="button" type="button">LEADERBOARD</button>
 			</div>
 		</div>
@@ -42,6 +43,7 @@ UpdateScore.propTypes = {
 	clicks: PropTypes.number.isRequired,
 	restart: PropTypes.func.isRequired,
 	routeChange: PropTypes.func.isRequired,
+	resetClicks: PropTypes.func.isRequired,
 };
 
 export default UpdateScore;
