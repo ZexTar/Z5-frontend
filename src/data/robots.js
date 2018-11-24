@@ -1,98 +1,15 @@
-const robots = [
-	{
-		id: 1,
-		genKey: 1,
-	},
+const robots = [];
 
-	{
-		id: 2,
-		genKey: 2,
-	},
-
-	{
-		id: 3,
-		genKey: 3,
-	},
-
-	{
-		id: 4,
-		genKey: 4,
-	},
-
-	{
-		id: 5,
-		genKey: 4,
-	},
-
-	{
-		id: 6,
-		genKey: 5,
-	},
-
-	{
-		id: 7,
-		genKey: 6,
-	},
-
-	{
-		id: 8,
-		genKey: 7,
-	},
-
-	{
-		id: 9,
-		genKey: 8,
-	},
-
-	{
-		id: 10,
-		genKey: 9,
-	},
-
-	{
-		id: 11,
-		genKey: 1,
-	},
-
-	{
-		id: 12,
-		genKey: 2,
-	},
-
-	{
-		id: 13,
-		genKey: 3,
-	},
-
-	{
-		id: 14,
-		genKey: 4,
-	},
-
-	{
-		id: 15,
-		genKey: 5,
-	},
-
-	{
-		id: 16,
-		genKey: 5,
-	},
-
-	{
-		id: 17,
-		genKey: 6,
-	},
-
-	{
-		id: 18,
-		genKey: 7,
-	},
-
-	{
-		id: 19,
-		genKey: 8,
-	},
-];
+for (let i = 0; i < 19; i += 1) {
+	if (i < 4) {
+		robots.push({ id: i + 1, genKey: i + 1 });
+	} else if (i > 3 && i < 10) {
+		robots.push({ id: i + 1, genKey: i });
+	} else if (i > 9 && i < 15) {
+		robots.push({ id: i + 1, genKey: i - 9 });
+	} else {
+		robots.push({ id: i + 1, genKey: i - 10 });
+	}
+}
 
 export default robots;

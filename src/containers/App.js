@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import CardList from '../components/CardList';
+import Cards from '../components/Cards';
 import Restart from '../components/Restart';
 import SignIn from '../components/SignIn';
 import Navigation from '../components/Navigation';
@@ -13,7 +13,7 @@ import allActions from '../actions/actions';
 import './App.css';
 
 const mapStateToProps = state => ({
-	cards: state.update.toJS().cards,
+	cards: state.update.get('cards'),
 	route: state.route,
 });
 
@@ -115,7 +115,7 @@ class App extends Component {
 								: (
 									<div>
 										<div className="cards">
-											<CardList
+											<Cards
 												flipCard={actions.flipCard}
 												cards={cards}
 												clicking={this.clicking}
@@ -132,7 +132,12 @@ class App extends Component {
 }
 
 App.propTypes = {
-	cards: PropTypes.arrayOf(PropTypes.object).isRequired,
+	cards: PropTypes.shape({
+		id: PropTypes.number,
+		genKey: PropTypes.number,
+		flipped: PropTypes.string,
+		solved: PropTypes.string,
+	}).isRequired,
 	actions: PropTypes.objectOf(PropTypes.func).isRequired,
 	route: PropTypes.string.isRequired,
 };

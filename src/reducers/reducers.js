@@ -1,55 +1,21 @@
-import _ from 'lodash';
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 import cards from '../data/cards';
-import constants from '../constants/constants';
+import actionTypes from '../constants/actiontypes';
 import hc from '../helper/handleClick';
 
-const [FLIP_CARD, RESTART_GAME, CHANGE_ROUTE] = constants;
-let compare = [];
+const { FLIP_CARD, RESTART_GAME, CHANGE_ROUTE } = actionTypes;
+const initialState = { cards };
 
-const initialStateCards = { cards };
-
-const update = (state = Map(initialStateCards), action = {}) => {
-	const newState = _.cloneDeep(state.toJS());
-
+const update = (state = fromJS(initialState), action = {}) => {
 	switch (action.type) {
 	case FLIP_CARD:
-		if (hc.flippedNumber(newState.cards) < 2) {
-			if (compare.length < 2) {
-				compare.push(action.genKey);
-			}
-
-			hc.flipClicked(newState.cards, action.id);
-			hc.solveMatched(newState.cards, compare);
-
-			return Map(newState);
-		}
-
-		if (hc.flippedNumber(newState.cards) === 2) {
-			compare = [];
-
-			hc.hideUnmatched(newState.cards);
-			hc.flipClicked(newState.cards, action.id);
-
-			if (compare.length < 2) {
-				compare.push(action.genKey);
-			}
-
-			return Map(newState);
-		}
-		break;
-
+		return hc.update(state, action);
 	case RESTART_GAME:
-		compare = [];
-		hc.shuffle(initialStateCards.cards);
-
-		return Map(initialStateCards);
+		return fromJS(hc.shuffle(initialState));
 
 	default:
 		return state;
 	}
-
-	return state;
 };
 
 const initialStateRoute = 'signin';
