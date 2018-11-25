@@ -4,7 +4,7 @@ This is concentration game written with React, using Redux as state container an
 
 To play concentration game follow next steps in terminal:
 
-1 - ```git clone https://github.com/ZexTar/Z4.git```
+1 - ```git clone https://github.com/ZexTar/concentration-game-frontend.git```
 
 2 - ```npm install```
 
