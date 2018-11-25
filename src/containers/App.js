@@ -21,8 +21,6 @@ const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(allActions, dispatch),
 });
 
-let count = 0;
-
 class App extends Component {
 	constructor() {
 		super();
@@ -39,8 +37,7 @@ class App extends Component {
 
 	clicking = () => {
 		const { user } = this.state;
-		count += 1;
-		this.setState(Object.assign(user, { clicks: count }));
+		this.setState(Object.assign(user, { clicks: user.clicks + 1 }));
 	}
 
 	loadUser = (data) => {
@@ -57,8 +54,7 @@ class App extends Component {
 
 	resetClicks = () => {
 		const { user } = this.state;
-		count = 0;
-		this.setState(Object.assign(user, { clicks: count }));
+		this.setState(Object.assign(user, { clicks: 0 }));
 	}
 
 	render() {
