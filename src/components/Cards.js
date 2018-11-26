@@ -6,10 +6,24 @@ const img2 = 'https://cdn.shopify.com/s/files/1/0405/8713/products/light_blue_-_
 
 const Cards = ({
 	flipCard,
+	hideUnmatched,
+	solveMatched,
 	cards,
 	clicking,
 	routeChange,
 }) => {
+	const flippedNumber = () => {
+		let flippedCards = 0;
+		cards.map((el) => {
+			if (el.get('flipped') === 'true') {
+				flippedCards += 1;
+			}
+
+			return 0;
+		});
+
+		return flippedCards;
+	};
 	const isGameSolved = () => {
 		let solvedNum = 0;
 		cards.forEach((card) => {
@@ -39,7 +53,14 @@ const Cards = ({
 			return (
 				<div
 					key={card.get('id')}
-					onClick={() => { flipCard(card.get('id'), card.get('genKey')); clicking(); }}
+					onClick={() => {
+						if (flippedNumber() === 2) {
+							hideUnmatched();
+						}
+						flipCard(card.get('id'), card.get('genKey'));
+						solveMatched();
+						clicking();
+					}}
 					className="tc grow bg-light-green br3 pa1 ma2 dib bw2 shadow-5"
 					role="presentation"
 				>
@@ -70,6 +91,8 @@ Cards.propTypes = {
 		flipped: PropTypes.string,
 		solved: PropTypes.string,
 	}).isRequired,
+	hideUnmatched: PropTypes.func.isRequired,
+	solveMatched: PropTypes.func.isRequired,
 	clicking: PropTypes.func.isRequired,
 	routeChange: PropTypes.func.isRequired,
 };

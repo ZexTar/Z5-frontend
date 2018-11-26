@@ -82,5 +82,6 @@
     "no-nested-ternary": 0,
     "no-unused-state": 0,
     "react/destructuring-assignment": [<enabled>, 'never'],
+    "no-case-declarations": 0,
   }
 }

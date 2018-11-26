@@ -113,6 +113,8 @@ class App extends Component {
 										<div className="cards">
 											<Cards
 												flipCard={actions.flipCard}
+												hideUnmatched={actions.hideUnmatched}
+												solveMatched={actions.solveMatched}
 												cards={cards}
 												clicking={this.clicking}
 												routeChange={actions.routeChange}
